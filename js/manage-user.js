@@ -114,6 +114,9 @@ $(document).ready(function () {
         let name = $('.add-user-name').val();
         let email = $('.add-user-email').val();
         let pass = $('.add-user-password').val();
+        let role = $('.add-user-select-role').val();
+        let dep_id = $('.select-department-add').val();
+
         var regExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*]).{8,}$/;
 
         if(name == '') {
@@ -136,7 +139,7 @@ $(document).ready(function () {
                             url: "./process/add-user.php",
                             type: "POST",
                             dataType: "html",
-                            data: {'name': name, 'email': email, 'password': pass},
+                            data: {'name': name, 'email': email, 'password': pass, 'role': role, 'dep': dep_id},
                             success: function (data) {
                                 if(data=="success"){
                                     alert('User added successfully');
@@ -154,5 +157,18 @@ $(document).ready(function () {
             }
         }
 
+    });
+    $('#select-department').change(function () {
+        let id = $(this).val();
+        $.ajax({
+            url: "./process/select-user.php",
+            type: "POST",
+            dataType: "html",
+            data: {'id_department': id},
+            success: function (data) {
+                console.log(data);
+                $('#tb-user').html(data);
+            }
+        });
     });
 });

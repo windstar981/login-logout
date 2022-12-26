@@ -23,11 +23,27 @@ else{
 }
 $query = "SELECT * FROM users";
 $res = mysqli_query($conn, $query);
+
+$sql_department = "SELECT * FROM departments";
+$result_department = mysqli_query($conn, $sql_department);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="zxx">
 <?php require_once("templates/header.php");?>
 <div class="container mt-5">
+    <div class="mb-5 d-block">
+        <select class="form-select" id="select-department" aria-label="Default select example">
+            <option value="0" selected>All department</option>
+            <?php
+            while($row = mysqli_fetch_assoc($result_department)){
+                echo "<option value='".$row['id']."'>".$row['name']."</option>";
+            }
+            ?>
+        </select>
+    </div>
+
     <button class="btn btn-info btn-add-user" data-bs-toggle="modal" data-bs-target="#exampleModal-add-user">Add user</button>
     <table class="table">
         <thead>
@@ -41,7 +57,7 @@ $res = mysqli_query($conn, $query);
             <th scope="col">Reset password</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody id="tb-user">
         <?php $i = 0; while($user = mysqli_fetch_assoc($res)){ ?>
             <tr>
                 <th scope="row"><?php echo ++$i; ?></th>
@@ -135,6 +151,23 @@ $res = mysqli_query($conn, $query);
                     <input type="text" aria-label="First name" id="password" class="form-control add-user-password">
                     <label style="font-size:10px; color:red;" class="d-none val-pass" for="password">Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character</label>
                 </div>
+            </div>
+            <div class="modal-body">
+                <select class="form-select add-user-select-role" aria-label="Default select example">
+                    <option value="1">Admin</option>
+                    <option value="0" selected>User</option>
+                </select>
+            </div>
+            <?php $sql_department = "SELECT * FROM departments";
+            $result_department = mysqli_query($conn, $sql_department); ?>
+            <div class="modal-body">
+                <select class="form-select select-department-add"  aria-label="Default select example">
+                    <?php
+                    while($row = mysqli_fetch_assoc($result_department)){
+                        echo "<option selected value='".$row['id']."'>".$row['name']."</option>";
+                    }
+                    ?>
+                </select>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
