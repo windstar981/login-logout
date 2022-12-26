@@ -1,7 +1,7 @@
 <?php
 session_start();
 include('config/db_connect.php');
-require_once("templates/header.php");
+
 if(isset($_SESSION['id']))
 {
     $id = $_SESSION['id'];
@@ -26,6 +26,7 @@ $res = mysqli_query($conn, $query);
 ?>
 <!DOCTYPE html>
 <html lang="zxx">
+<?php require_once("templates/header.php");?>
 <div class="container mt-5">
     <button class="btn btn-info btn-add-user" data-bs-toggle="modal" data-bs-target="#exampleModal-add-user">Add user</button>
     <table class="table">
