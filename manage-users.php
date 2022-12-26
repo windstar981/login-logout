@@ -5,6 +5,7 @@ require_once("templates/header.php");
 if(isset($_SESSION['id']))
 {
     $id = $_SESSION['id'];
+
     $query = "SELECT * FROM users WHERE id = '$id'";
     $res = mysqli_query($conn, $query);
 
@@ -33,6 +34,7 @@ $res = mysqli_query($conn, $query);
             <th scope="col">#</th>
             <th scope="col">Name</th>
             <th scope="col">Email</th>
+            <th scope="col">Role</th>
             <th scope="col">Edit</th>
             <th scope="col">Delete</th>
             <th scope="col">Reset password</th>
@@ -44,6 +46,7 @@ $res = mysqli_query($conn, $query);
                 <th scope="row"><?php echo ++$i; ?></th>
                 <td><?php echo $user['name'] ?></td>
                 <td><?php echo $user['email'] ?></td>
+                <td><?php echo $user['role'] < 1 ?  'member' :   'admin';?></td>
                 <td><button class="edit-user btn btn-primary" data-id="<?php echo $user['id'] ?>" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" ><i class="fa-solid fa-user-pen"></i></button></td>
                 <td><button  class="delete-user btn btn-danger" data-id="<?php echo $user['id'] ?>"><i class="fa-solid fa-trash"></i></button></td>
                 <td><button class="reset-password btn btn-info" data-id="<?php echo $user['id'] ?>"data-bs-toggle="modal" data-bs-target="#exampleModal-reset-password"><i class="fa-solid fa-gear"></i></button></td>
@@ -70,6 +73,9 @@ $res = mysqli_query($conn, $query);
                     <span class="input-group-text ">Email</span>
                     <input type="text" aria-label="First name" class="form-control user-email">
                 </div>
+                <select class="form-select edit-user-select-role" aria-label="Default select example">
+
+                </select>
 
             </div>
             <div class="modal-footer">
@@ -90,7 +96,9 @@ $res = mysqli_query($conn, $query);
             <div class="modal-body">
                 <div class="input-group mb-3">
                     <span class="input-group-text ">Password</span>
-                    <input type="text" aria-label="First name" class="form-control user-reset-password">
+                    <input type="text" aria-label="First name" id="password" class="form-control user-reset-password">
+                    <label style="font-size:10px; color:red;" class="d-none val-pass" for="password">Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character</label>
+
                 </div>
             </div>
             <div class="modal-footer">
@@ -123,7 +131,8 @@ $res = mysqli_query($conn, $query);
             <div class="modal-body">
                 <div class="input-group">
                     <span class="input-group-text ">Password</span>
-                    <input type="text" aria-label="First name" class="form-control add-user-password">
+                    <input type="text" aria-label="First name" id="password" class="form-control add-user-password">
+                    <label style="font-size:10px; color:red;" class="d-none val-pass" for="password">Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character</label>
                 </div>
             </div>
             <div class="modal-footer">

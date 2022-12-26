@@ -6,30 +6,30 @@ $errors = [];
 if (isset($_POST['register'])) {
 
     if (empty($_POST['email'])) {
-        $errors[] = 'Hãy nhập Email';
+        $errors[] = 'Please enter Email';
     } else {
         $email = $_POST['email'];
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $errors[] = 'Email không hợp lệ';
+            $errors[] = 'Invalid email';
         }
     }
     if (empty($_POST['name'])) {
-        $errors[] = 'Hãy nhập tên của bạn';
+        $errors[] = 'Please enter your name';
     } else {
         $name = $_POST['name'];
     }
 
     if (empty($_POST['password'])) {
-        $errors[] = 'Hãy nhập mật khẩu';
+        $errors[] = 'Please enter password';
     } else {
         $pass = $_POST['password'];
     }
     if (empty($_POST['cpassword'])) {
-        $errors[] = 'Hãy nhập lại mật khẩu';
+        $errors[] = 'Please re-enter your password';
     } else {
         $cpass = $_POST['cpassword'];
         if ($cpass != $pass) {
-            $errors[] = 'Mật khẩu không khớp';
+            $errors[] = 'Password incorrect';
         }
     }
     if (empty($errors)) {
@@ -73,7 +73,7 @@ if (isset($_POST['register'])) {
                             <div class="row justify-content-center">
 
                                 <div class="col-md-10 col-lg-6 col-xl-6 order-2 order-lg-1">
-                                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Đăng ký</p>
+                                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Register</p>
                                     <?php if (!empty($errors)) : ?>
                                         <div class="alert alert-danger text-center" role="alert">
                                             <?php foreach ($errors as $error) : ?>
@@ -81,14 +81,14 @@ if (isset($_POST['register'])) {
                                             <?php endforeach; ?>
                                         </div>
                                     <?php endif; ?>
-                                    <form action="register.php" method="post">
+                                    <form id="form-register" action="register.php" method="post">
 
                                         <div class="row">
                                             <div class="col-md-12 col-12 mb-3">
-                                                <label for="email">Họ và tên</label>
+                                                <label for="email">Full name</label>
                                                 <input Required class="mb-0 form-control"
                                                        value="<?php echo htmlspecialchars($name) ?>" name="name"
-                                                       type="text" id="name" placeholder="Họ và tên">
+                                                       type="text" id="name" placeholder="Full name">
 
                                             </div>
                                             <div class="col-12 mb-3">
@@ -99,23 +99,24 @@ if (isset($_POST['register'])) {
                                             </div>
 
                                             <div class="col-lg-6 mb-3">
-                                                <label for="password">Mật khẩu</label>
+                                                <label for="password">Password</label>
                                                 <input Required class="mb-0 form-control"
                                                        value="<?php echo htmlspecialchars($pass) ?>" name="password"
                                                        type="password" id="password" placeholder="Mật khẩu">
+                                                <label style="font-size:10px; color:red;" class="d-none val-pass" for="password">Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character</label>
                                             </div>
                                             <div class="col-lg-6 mb--20">
-                                                <label for="password">Nhập lại mật khẩu</label>
+                                                <label for="password">Re-enter password</label>
                                                 <input Required class="mb-0 form-control" name="cpassword"
                                                        type="password" value="<?php echo htmlspecialchars($cpass) ?>"
                                                        id="repeat-password" placeholder="Nhập lại mật khẩu">
                                             </div>
                                             <div class="col-md-12">
-                                                <button name="register" class="btn btn-success">Đăng ký</button>
+                                                <button name="register" type="button"  class="btn btn-success btn-register">Register</button>
                                             </div>
                                         </div>
                                     </form>
-                                    <p class="font-weight-bold">Bạn đã có tài khoản? <a href="login.php" class="link-info text-primary">Đăng nhập tại đây</a></p>
+                                    <p class="font-weight-bold">Did you have account? <a href="login.php" class="link-info text-primary">Login here!</a></p>
 
                                 </div>
                                 <div class="col-md-10 col-lg-6 col-xl-6 d-flex align-items-center order-1 order-lg-2">

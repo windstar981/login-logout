@@ -18,9 +18,9 @@ if(isset($_SESSION['id']))
         if($result)
         {
             $user = mysqli_fetch_assoc($result);
-            $arrKey = ['id', 'name', 'email', 'password'];
+            $arrKey = ['id', 'name', 'email', 'password','role'];
             $arrValue = [];
-            $arrValue = [$user['id'], $user['name'], $user['email'], $user['password']];
+            $arrValue = [$user['id'], $user['name'], $user['email'], $user['password'],$user['role']];
             $arrRes = array_combine($arrKey, $arrValue);
             echo json_encode($arrRes);
         }
