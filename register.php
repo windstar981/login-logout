@@ -38,16 +38,15 @@ if (isset($_POST['register'])) {
 
         $user = mysqli_num_rows($res);
         if ($user >= 1) {
-            $errors['email'] = 'Email đã tồn tại';
+            $errors['email'] = 'Email already exists';
         } else {
             $pass_hash = password_hash($pass, PASSWORD_DEFAULT);
             $sql = "INSERT INTO `users`(`name`, `email`, `password`) VALUES ('$name','$email','$pass_hash')";
             $result = mysqli_query($conn, $sql);
             if ($result) {
-                // echo "<script> alert('Đăng ký thành công'); </script>";
-                header("Location: login.php?status=0");
+                header("Location: login.php");
             } else {
-                echo "Đăng ký thất bại";
+                echo "Register failed";
             }
         }
     }

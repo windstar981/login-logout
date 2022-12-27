@@ -2,11 +2,8 @@
 session_start();
 if(isset($_SESSION['id']))
 {
-
-
     if(empty($_POST['id_department']))
     {
-        //tra ve loi 1
         echo "No department";
     }
     else

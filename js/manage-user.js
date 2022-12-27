@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $('.edit-user').click(function () {
+    $(document).on('click','.edit-user',function(){
         var id = $(this).attr('data-id');
 
         $.ajax({
@@ -27,8 +27,7 @@ $(document).ready(function () {
             },
         });
     });
-
-    $('.save-user').click(function() {
+    $(document).on('click','.save-user',function(){
         event.preventDefault()
         var id = $(this).attr('data-id');
         var name = $('.user-name').val();
@@ -43,7 +42,7 @@ $(document).ready(function () {
             }
             else{
                 $.ajax({
-                    url: "./process/save-user.php",
+                    url: "./process/update-user.php",
                     type: "POST",
                     dataType: "html",
                     data: {'id_user': id, 'name': name, 'email': email, 'role': role},
@@ -60,10 +59,9 @@ $(document).ready(function () {
                 });
             }
         }
-
     });
 
-    $('.delete-user').click(function() {
+    $(document).on('click','.delete-user',function(){
         var id = $(this).attr('data-id');
 
         $.ajax({
@@ -83,12 +81,13 @@ $(document).ready(function () {
             }
         });
     });
-    $('.reset-password').click(function() {
+
+    $(document).on('click','.reset-password',function(){
         var id = $(this).attr('data-id');
         $('.save-reset-password').attr('data-id', id);
-
     });
-    $('.save-reset-password').click(function() {
+
+    $(document).on('click','.save-reset-password',function(){
         var id = $(this).attr('data-id');
         let pass = $('.user-reset-password').val();
         let regExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*]).{8,}$/;
@@ -110,6 +109,7 @@ $(document).ready(function () {
             });
         }
     });
+
     $('.btn-add-user-submit').click(function() {
         let name = $('.add-user-name').val();
         let email = $('.add-user-email').val();
@@ -147,7 +147,6 @@ $(document).ready(function () {
                                 }
                                 else{
                                     alert(data);
-                                    window.location.reload();
                                 }
                             }
                         });
@@ -159,6 +158,7 @@ $(document).ready(function () {
 
     });
     $('#select-department').change(function () {
+        $('.search-user').val('');
         let id = $(this).val();
         $.ajax({
             url: "./process/select-user.php",
@@ -168,6 +168,67 @@ $(document).ready(function () {
             success: function (data) {
                 console.log(data);
                 $('#tb-user').html(data);
+            }
+        });
+    });
+    $('.search-user').keyup(function () {
+        let name = $(this).val();
+        let dep_id = $('#select-department').val();
+        let limit = $('.select-number-row-user').val();
+        $.ajax({
+            url: "./process/search-user.php",
+            type: "POST",
+            dataType: "html",
+            data: {'name': name,  'dep_id': dep_id, 'limit': limit},
+            success: function (data) {
+                $('#tb-user').html(data);
+            }
+        });
+    });
+    $('.btn-search-user').click(function () {
+        let name = $('.search-user').val();
+        let dep_id = $('#select-department').val();
+        let limit = $('.select-number-row-user').val();
+        $.ajax({
+            url: "./process/search-user.php",
+            type: "POST",
+            dataType: "html",
+            data: {'name': name,  'dep_id': dep_id, 'limit': limit},
+            success: function (data) {
+                $('#tb-user').html(data);
+            }
+        });
+    });
+    $('.select-number-row-user').change(function () {
+        let name = $('.search-user').val();
+        let dep_id = $('#select-department').val();
+        let limit = $(this).val();
+        $.ajax({
+            url: "./process/search-user.php",
+            type: "POST",
+            dataType: "html",
+            data: {'name': name,  'dep_id': dep_id, 'limit': limit},
+            success: function (data) {
+                $('#tb-user').html(data);
+            }
+        });
+    });
+    $('.add-user-email').focusout(function () {
+        console.log($(this).val());
+        let email = $(this).val();
+        $.ajax({
+            url: "./process/check-email.php",
+            type: "POST",
+            data: { 'email': email},
+            success: function (data) {
+                console.log(data);
+                console.log(data.length);
+                if(data==="exist"){
+                    $('.val-email').removeClass("d-none");
+                }
+                else {
+                    $('.val-email').addClass("d-none");
+                }
             }
         });
     });

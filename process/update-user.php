@@ -1,5 +1,4 @@
 <?php
-session_abort();
 session_start();
 if (isset($_SESSION['id'])) {
     if (empty($_POST['id_user'])) {
@@ -22,7 +21,7 @@ if (isset($_SESSION['id'])) {
                 echo "success";
                 exit();
             } else {
-                echo "No user exists";
+                echo "Update user failed";
                 exit();
             }
         } else {

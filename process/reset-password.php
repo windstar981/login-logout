@@ -1,5 +1,4 @@
 <?php
-session_abort();
 session_start();
 if(isset($_SESSION['id'])) {
     if(empty($_POST['id_user'] && empty($_POST['password'])) ){

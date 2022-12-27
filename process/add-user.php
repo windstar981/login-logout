@@ -1,11 +1,9 @@
 <?php
-session_abort();
 session_start();
 include('../config/db_connect.php');
 if(isset($_SESSION['id']))
 {
-    var_dump($_POST);
-    if(empty($_POST['name']) || empty($_POST['email']) || empty($_POST['password']) || empty($_POST['role']) || empty($_POST['dep']))
+    if(empty($_POST['name']) || empty($_POST['email']) || empty($_POST['password']) )
     {
         echo "Please enter full information";
     }

@@ -14,13 +14,16 @@ ob_start();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <title>Pet project</title>
+    <link rel="stylesheet" href="./css/app.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
 <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="manage-users.php">Quản lý user</a>
+            <a class="btn navbar-brand url-redirect-home " href="index.php">Home</a>
+            <a class="btn navbar-brand url-redirect-manage-user" href="manage-users.php">Manage User</a>
+            <a class="btn navbar-brand url-redirect-manage-department" href="manage-department.php">Manage Department</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -28,7 +31,7 @@ ob_start();
 
                 <div>
                     <div class="dropdown">
-                        <p class="btn btn-info dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="btn btn-info dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                             <?php
                             if(isset($_SESSION['name'])) {
                                 echo $_SESSION['name'];
@@ -36,7 +39,7 @@ ob_start();
                                 echo "Tài khoản";
                             }
                             ?>
-                        </p>
+                        </span>
 
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <?php
@@ -53,5 +56,4 @@ ob_start();
             </div>
         </div>
     </nav>
-
 </div>

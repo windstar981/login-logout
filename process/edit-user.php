@@ -2,12 +2,9 @@
 session_start();
 if(isset($_SESSION['id']))
 {
-
-
     if(empty($_POST['id_user']))
     {
-        //tra ve loi 1
-        echo "err1";
+        echo "No user selected";
     }
     else
     {
@@ -26,7 +23,7 @@ if(isset($_SESSION['id']))
         }
         else
         {
-            echo "err2";
+            echo "Edit failed";
         }
     }
 }
